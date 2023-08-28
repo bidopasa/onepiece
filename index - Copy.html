@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>One Piece Anime Quiz</title>
+    <style>
+      /* Your CSS styles here */
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const questions = [
+          {
+            question: "What is the name of Monkey D. Luffy's signature attack?",
+            options: [
+              "Gum-Gum Gatling",
+              "Red Hawk",
+              "Elephant Gun",
+              "Gomu Gomu no Pistol",
+            ],
+            correctAnswer: 0,
+          },
+          {
+            question: "Who is the captain of the Straw Hat Pirates?",
+            options: ["Roronoa Zoro", "Nami", "Sanji", "Monkey D. Luffy"],
+            correctAnswer: 3,
+          },
+          {
+            question: "What is the name of Zoro's three-sword style technique?",
+            options: [
+              "Black Sword",
+              "White Sword",
+              "Three-Sword Technique",
+              "Santoryu",
+            ],
+            correctAnswer: 3,
+          },
+          // Add more questions here...
+          {
+            question: "What is the name of Luffy's ship?",
+            options: [
+              "Thousand Sunny",
+              "Red Force",
+              "Moby Dick",
+              "Going Merry",
+            ],
+            correctAnswer: 0,
+          },
+        ];
+
+        let currentQuestionIndex = 0;
+        const questionElement = document.querySelector(".quiz-question");
+        const optionsElement = document.querySelector(".quiz-options");
+        const nextButton = document.querySelector(".next-button");
+
+        function loadQuestion(index) {
+          questionElement.textContent = questions[index].question;
+          optionsElement.innerHTML = "";
+          questions[index].options.forEach((option, optionIndex) => {
+            const optionButton = document.createElement("button");
+            optionButton.textContent = option;
+            optionButton.addEventListener("click", function () {
+              checkAnswer(optionIndex);
+            });
+            optionsElement.appendChild(optionButton);
+          });
+        }
+
+        function checkAnswer(selectedIndex) {
+          if (selectedIndex === questions[currentQuestionIndex].correctAnswer) {
+            optionsElement.innerHTML = "Correct!";
+          } else {
+            optionsElement.innerHTML = "Wrong!";
+          }
+          nextButton.style.display = "block";
+        }
+
+        nextButton.addEventListener("click", function () {
+          currentQuestionIndex++;
+          if (currentQuestionIndex < questions.length) {
+            loadQuestion(currentQuestionIndex);
+            nextButton.style.display = "none";
+          } else {
+            questionElement.textContent = "Quiz Completed!";
+            optionsElement.innerHTML = "";
+            nextButton.style.display = "none";
+          }
+        });
+
+        loadQuestion(currentQuestionIndex);
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>One Piece Anime Quiz</h1>
+      <p>Test your knowledge about the One Piece anime!</p>
+    </header>
+
+    <div class="container">
+      <div class="quiz-question">
+        <!-- Question text will be inserted here -->
+      </div>
+      <div class="quiz-options">
+        <!-- Options will be inserted here -->
+      </div>
+      <button class="next-button" style="display: none">Next Question</button>
+    </div>
+
+    <footer>
+      <p>&copy; 2023 One Piece Quiz. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
